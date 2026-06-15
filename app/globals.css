@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+/* Fathom theme — cinematic, literary, minimal. Near-black canvas, one warm amber
+   accent, generous negative space. Restraint over decoration. */
+@theme {
+  --color-canvas: #0a0908; /* near-black, faintly warm */
+  --color-ink: #ece7df; /* parchment foreground */
+  --color-muted: #8a8175; /* dim labels / secondary text */
+  --color-faint: #4a463f; /* hairlines, idle nodes */
+  --color-accent: #e0a458; /* warm amber — nodes, lines, glow */
+  --color-accent-dim: #9c7843;
+
+  --font-serif: var(--font-serif), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-mono), ui-monospace, "SFMono-Regular", monospace;
+}
+
+html,
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+}
+
+body {
+  font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Hide scrollbars on the canvas without disabling scroll. */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
