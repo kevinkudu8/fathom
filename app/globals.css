@@ -1,23 +1,54 @@
 @import "tailwindcss";
 
-/* Fathom theme — cinematic, literary, minimal. Near-black canvas, one warm amber
-   accent, generous negative space. Restraint over decoration. */
+/* Fathom theme — cinematic, literary, minimal. One warm amber accent, generous
+   negative space, restraint over decoration. Two genuinely-designed palettes
+   (dark default / warm-paper light) swapped via [data-theme] on <html>. The
+   utility tokens below resolve to runtime CSS vars so the theme can switch live. */
 @theme {
-  --color-canvas: #0a0908; /* near-black, faintly warm */
-  --color-ink: #ece7df; /* parchment foreground */
-  --color-muted: #8a8175; /* dim labels / secondary text */
-  --color-faint: #4a463f; /* hairlines, idle nodes */
-  --color-accent: #e0a458; /* warm amber — nodes, lines, glow */
-  --color-accent-dim: #9c7843;
+  --color-canvas: var(--c-canvas);
+  --color-ink: var(--c-ink);
+  --color-muted: var(--c-muted);
+  --color-faint: var(--c-faint);
+  --color-accent: var(--c-accent);
+  --color-accent-dim: var(--c-accent-dim);
 
   --font-serif: var(--font-serif), Georgia, "Times New Roman", serif;
   --font-mono: var(--font-mono), ui-monospace, "SFMono-Regular", monospace;
+}
+
+/* Dark (default) — near-black, faintly warm. */
+:root,
+[data-theme="dark"] {
+  --c-canvas: #0a0908;
+  --c-ink: #ece7df;
+  --c-muted: #8a8175;
+  --c-faint: #4a463f;
+  --c-accent: #e0a458;
+  --c-accent-dim: #9c7843;
+  --glow: 18%; /* accent strength of the center glow */
+}
+
+/* Light — warm off-white paper with a dark serif. Not inverted: a deeper ochre
+   accent for contrast, soft sand hairlines, ink that reads like print. */
+[data-theme="light"] {
+  --c-canvas: #f1ead9;
+  --c-ink: #2a2520;
+  --c-muted: #8c8270;
+  --c-faint: #d8cdb6;
+  --c-accent: #b3742a;
+  --c-accent-dim: #c19a63;
+  --glow: 10%;
 }
 
 html,
 body {
   background: var(--color-canvas);
   color: var(--color-ink);
+}
+
+html {
+  /* avoid a hard flash when the theme swaps */
+  transition: background-color 0.4s ease;
 }
 
 body {

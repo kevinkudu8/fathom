@@ -12,11 +12,15 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { topic } = await params;
   const label = deslugify(topic);
-  const title = `${label} — five books · Fathom`;
+  const title = `Fathom — five books on ${label}`;
+  const description = `A curated five-book reading path on ${label}.`;
+  // openGraph/twitter images are supplied automatically by opengraph-image.tsx
+  // and twitter-image.tsx in this route.
   return {
     title,
-    description: `A curated five-book reading path on ${label}.`,
-    openGraph: { title, description: `A curated five-book reading path on ${label}.` },
+    description,
+    openGraph: { title, description, type: "article" },
+    twitter: { card: "summary_large_image", title, description },
   };
 }
 
